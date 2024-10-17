@@ -1,4 +1,4 @@
-# Projeto com Docker
+# Projeto Receitas A4PM
 
 Este projeto utiliza Docker para criar contêineres para o backend e frontend.
 
@@ -10,8 +10,7 @@ Este projeto utiliza Docker para criar contêineres para o backend e frontend.
 
 1. **Configurar variáveis de ambiente**:
 
-   - Crie um arquivo `.env` na pasta `backend` e na pasta `frontend` do projeto.
-   - Certifique-se de preencher as variáveis no docker para a aplicação funcionar corretamente.
+   - As variáveis de ambiente no Docker já estão preenchidas com valores padrão. Basta customizá-las conforme suas necessidades para que a aplicação funcione corretamente.
 
 2. **Subir os contêineres**:
 
