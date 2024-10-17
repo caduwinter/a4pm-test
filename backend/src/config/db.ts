@@ -1,19 +1,17 @@
 import { Sequelize } from "sequelize";
-import dotenv from "dotenv";
-
-dotenv.config();
+import { config } from "./config";
 
 const sequelize = new Sequelize(
-  process.env.DB_NAME || "teste_receitas_rg_sistemas",
-  process.env.DB_USER || "root",
-  process.env.DB_PASSWORD,
+  config.dbName || "teste_receitas_rg_sistemas",
+  config.dbUser || "root",
+  config.dbPassword,
   {
-    host: process.env.DB_HOST || "mysql",
+    host: config.dbHost || "mysql",
     dialect: "mysql",
     dialectOptions: {
       charset: "utf8mb4",
     },
-    port: Number(process.env.DB_PORT) || 3306,
+    port: Number(config.dbPort) || 3306,
     define: {
       freezeTableName: true,
     },

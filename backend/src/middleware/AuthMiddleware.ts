@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import GenericView from "../views/GenericView";
+import { config } from "../config/config";
 
 interface DecodedToken {
   id: number;
@@ -20,7 +21,7 @@ function mustBeAuthenticated(
   }
 
   try {
-    const decoded = jwt.verify(token, "secret") as DecodedToken;
+    const decoded = jwt.verify(token, config.jwtSecret) as DecodedToken;
     req.user = decoded;
     next();
   } catch (error) {

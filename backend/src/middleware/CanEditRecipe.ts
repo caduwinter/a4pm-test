@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import RecipeRepository from "../repositories/ReceitaRepositoryBDR";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { config } from "../config/config";
 
 const canEditRecipe = async (
   req: Request,
@@ -34,7 +35,7 @@ const canEditRecipe = async (
 
 function getUserIdFromToken(req: Request): number {
   const token = req.cookies.token;
-  const decoded = jwt.verify(token, "secret") as JwtPayload;
+  const decoded = jwt.verify(token, config.jwtSecret) as JwtPayload;
   return decoded.id;
 }
 

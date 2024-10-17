@@ -2,6 +2,7 @@ import UserRepositoryBDR from "../repositories/UsuarioRepositoryBDR";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import UserLoginDTO from "../dto/UserLoginDTO";
+import { config } from "../config/config";
 
 class UserService {
   async registerUser(nome: string, login: string, senha: string) {
@@ -27,7 +28,7 @@ class UserService {
   }
 
   generateToken(userId: number): string {
-    return jwt.sign({ id: userId }, "secret", { expiresIn: "1d" });
+    return jwt.sign({ id: userId }, config.jwtSecret, { expiresIn: "1d" });
   }
 
   async findUserById(id: number) {

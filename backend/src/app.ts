@@ -7,8 +7,7 @@ import categoriaRoutes from "./routes/Categoria";
 import recipeRoutes from "./routes/Receita";
 import cookieParser from "cookie-parser";
 
-import dotenv from "dotenv";
-dotenv.config();
+import { config } from "./config/config";
 
 const createServer = () => {
   const app = express();
@@ -18,7 +17,7 @@ const createServer = () => {
   app.use(cookieParser());
   app.use(
     cors({
-      origin: process.env.FRONTEND_URL,
+      origin: config.frontendUrl,
       credentials: true,
     }),
   );
@@ -38,7 +37,7 @@ const startServer = async () => {
   try {
     await sequelize.sync({ force: false });
 
-    const PORT = process.env.PORT || 7000;
+    const PORT = config.defaultPort;
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   } catch (error) {
     console.error("Failed to sync database:", error);
