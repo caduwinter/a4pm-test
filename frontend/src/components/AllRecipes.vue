@@ -92,8 +92,8 @@ export default {
     return {
       localRecipes: [...this.allRecipes],
       activeTooltip: null,
-      showDeleteModal: false, // Controle de exibição do modal
-      recipeIdToDelete: null, // ID da receita a ser deletada
+      showDeleteModal: false,
+      recipeIdToDelete: null,
     };
   },
   computed: {
