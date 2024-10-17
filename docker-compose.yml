@@ -36,7 +36,6 @@ services:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
     environment:
-      NODE_ENV: development
       CHOKIDAR_USEPOLLING: "true"
       DB_NAME: teste_receitas_rg_sistemas
       DB_USER: root
@@ -44,6 +43,8 @@ services:
       DB_HOST: mysql
       DB_PORT: 3306
       FRONTEND_URL: http://localhost:8080
+      JWT_SECRET: ?secretjwt
+      PORT: 7000
     ports:
       - "7000:7000"
     depends_on:
