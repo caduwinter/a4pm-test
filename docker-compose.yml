@@ -26,6 +26,7 @@ services:
       - "3306:3306"
     volumes:
       - ./script.sql:/docker-entrypoint-initdb.d/script.sql
+      - ./script_test.sql:/docker-entrypoint-initdb.d/script_test.sql
     restart: always
 
   backend:
