@@ -6,7 +6,9 @@
 
     <form class="recipe-form" @submit.prevent="handleSubmit">
       <div class="form-group">
+        <label v-if="isEdit" for="recipeName">Nome da Receita:</label>
         <input
+          id="recipeName"
           type="text"
           v-model="recipeName"
           placeholder="Nome da Receita"
@@ -16,7 +18,9 @@
       </div>
 
       <div class="form-group">
+        <label v-if="isEdit" for="prepTime">Tempo de Preparo (min):</label>
         <input
+          id="prepTime"
           type="text"
           v-model="prepTime"
           placeholder="Tempo de Preparo (min)"
@@ -27,7 +31,9 @@
       </div>
 
       <div class="form-group">
+        <label v-if="isEdit" for="servings">Porções:</label>
         <input
+          id="servings"
           type="text"
           v-model="servings"
           placeholder="Porções"
@@ -36,8 +42,11 @@
           required
         />
       </div>
+
       <div class="form-group">
+        <label v-if="isEdit" for="ingredientsList">Ingredientes:</label>
         <input
+          id="ingredientsList"
           type="text"
           v-model="ingredientsList"
           placeholder="Ingredientes"
@@ -47,7 +56,9 @@
       </div>
 
       <div class="form-group">
+        <label v-if="isEdit" for="instructions">Modo de Preparo:</label>
         <input
+          id="instructions"
           type="text"
           v-model="instructions"
           placeholder="Modo de Preparo"
@@ -55,8 +66,15 @@
           required
         />
       </div>
+
       <div class="form-group">
-        <select v-model="selectedCategoryId" class="select-field" required>
+        <label v-if="isEdit" for="selectedCategory">Categoria:</label>
+        <select
+          id="selectedCategory"
+          v-model="selectedCategoryId"
+          class="select-field"
+          required
+        >
           <option value="" disabled>Selecione uma Categoria</option>
           <option
             v-for="category in availableCategories"
@@ -226,11 +244,24 @@ export default {
   margin: 0;
 }
 
-.form-group * {
+.form-group label {
+  float: left;
+  color: rgb(73, 73, 73);
+  font-size: 14px;
+}
+.form-group input {
   padding: 0.75rem 0.5rem;
   border: none;
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 8px;
+  width: 100%;
+}
+.form-group select {
+  padding: 0.75rem 0.5rem;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+
   width: 100%;
 }
 .form-group {
