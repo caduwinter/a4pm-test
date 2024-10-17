@@ -1,7 +1,9 @@
 <template>
   <nav class="navbar">
-    <div class="navbar-links">
-      <router-link class="navbar-logo" to="/">Receitas</router-link>
+    <div class="main-page">
+      <router-link class="navbar-logo" to="/">
+        <font-awesome-icon icon="home" />
+      </router-link>
     </div>
     <div class="navbar-search">
       <input
@@ -11,7 +13,7 @@
         aria-label="Filtrar receitas"
       />
     </div>
-    <div class="navbar-auth">
+    <div class="navbar-actions">
       <router-link
         v-if="isLoggedIn"
         class="navbar-button create-recipe-btn"
@@ -76,10 +78,10 @@ export default {
 <style scoped>
 .navbar-logo {
   font-size: 1.7em;
-  color: #fff; /* Manter a cor branca para o logo */
+  color: #fff;
 }
 .navbar-button {
-  color: #fff; /* Cor do texto dos botões da navbar */
+  color: #fff;
   text-decoration: none;
   background: none;
 }
@@ -116,12 +118,12 @@ export default {
   border-radius: 0 0 16px 16px;
 }
 
-.navbar-links {
+.main-page {
   padding: 0 2rem;
   align-content: center;
 }
 
-.navbar-auth {
+.navbar-actions {
   display: flex;
   gap: 1rem;
   padding: 0 2rem;
@@ -164,15 +166,18 @@ export default {
   border-bottom: 2px solid white;
 }
 @media (max-width: 425px) {
-  .navbar-links,
+  .main-page,
   .navbar-button {
     font-size: 14px !important;
   }
 }
 @media (max-width: 480px) {
-  .navbar-links,
+  .main-page,
   .navbar-button {
     font-size: 18px;
+  }
+  .main-page {
+    padding: 0 1rem;
   }
 
   .logout-btn,

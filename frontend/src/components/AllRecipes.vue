@@ -44,14 +44,7 @@
           </div>
           <span class="manipulate" v-if="isUserRecipe(recipe.id)">
             <button
-              @click="editRecipe(recipe.id)"
-              class="edit-recipe-btn"
-              aria-label="Editar receita"
-            >
-              ✏️
-            </button>
-            <button
-              @click="deleteRec(recipe.id)"
+              @click="confirmDelete(recipe.id)"
               class="delete-recipe-btn"
               aria-label="Deletar receita"
             >
@@ -63,14 +56,28 @@
       <p v-else class="no-recipes-message">Nenhuma receita encontrada.</p>
     </div>
   </section>
+  <modal-confirm
+    v-if="showDeleteModal"
+    @close="showDeleteModal = false"
+    @confirm="deleteRecipe"
+  >
+    <template v-slot:title>Confirmação</template>
+    <template v-slot:body
+      >Esta receita será excluída, deseja continuar?</template
+    >
+  </modal-confirm>
 </template>
 
 <script>
 import { searchQuery } from "@/eventBus";
 import { deleteRecipe } from "@/services/ReceitaService";
+import ModalConfirm from "@/components/ModalConfirm.vue"; // Modal component
 
 export default {
   name: "AllRecipes",
+  components: {
+    ModalConfirm,
+  },
   props: {
     allRecipes: {
       type: Array,
@@ -85,6 +92,8 @@ export default {
     return {
       localRecipes: [...this.allRecipes],
       activeTooltip: null,
+      showDeleteModal: false, // Controle de exibição do modal
+      recipeIdToDelete: null, // ID da receita a ser deletada
     };
   },
   computed: {
@@ -108,26 +117,25 @@ export default {
     isUserRecipe(recipeId) {
       return this.userRecipes.some((userRecipe) => userRecipe.id === recipeId);
     },
-    editRecipe(recipeId) {
-      this.$router.push(`/receita/edit?id=${recipeId}`);
+    confirmDelete(recipeId) {
+      this.recipeIdToDelete = recipeId;
+      this.showDeleteModal = true;
     },
-    async deleteRec(recipeId) {
-      if (confirm("Esta receita será excluída, deseja continuar?")) {
-        try {
-          await deleteRecipe(recipeId);
-          this.localRecipes = this.allRecipes.filter(
-            (recipe) => recipe.id !== recipeId,
-          );
-          this.$emit("recipe-deleted", recipeId);
-        } catch (error) {
-          console.error("Erro ao deletar a receita:", error);
-        }
+    async deleteRecipe() {
+      try {
+        await deleteRecipe(this.recipeIdToDelete);
+        this.localRecipes = this.allRecipes.filter(
+          (recipe) => recipe.id !== this.recipeIdToDelete,
+        );
+        this.$emit("recipe-deleted", this.recipeIdToDelete);
+        this.showDeleteModal = false;
+      } catch (error) {
+        console.error("Erro ao deletar a receita:", error);
       }
     },
   },
 };
 </script>
-
 <style scoped>
 .recipes-wrapper {
   text-align: center;

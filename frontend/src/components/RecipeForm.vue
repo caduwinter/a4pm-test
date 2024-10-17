@@ -1,7 +1,7 @@
 <template>
   <section class="recipe-container">
     <header>
-      <h2>{{ pageTitle }}</h2>
+      <h2 class="recipe-title">{{ pageTitle }}</h2>
     </header>
 
     <form class="recipe-form" @submit.prevent="handleSubmit">
@@ -192,10 +192,13 @@ export default {
 </script>
 
 <style scoped>
+.recipe-title {
+  margin: 5px 0;
+}
 .recipe-container {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 1.5rem;
   margin: 2.5rem auto;
   max-width: 420px;
   text-align: center;
@@ -248,5 +251,11 @@ export default {
 .submit-btn:hover {
   background-color: #fff;
   color: #5e61cd;
+}
+
+@media (max-width: 425px) {
+  .recipe-container {
+    margin: 12px;
+  }
 }
 </style>

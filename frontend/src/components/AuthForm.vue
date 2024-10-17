@@ -32,21 +32,35 @@
       </form>
     </transition>
   </section>
+  <ModalAlert
+    v-if="showErrorModal"
+    :visible="showErrorModal"
+    :title="modalTitle"
+    :message="modalMessage"
+    @close="showErrorModal = false"
+  />
 </template>
 
 <script>
+import ModalAlert from "@/components/ModalAlert";
 import { registerUser } from "@/services/UserService";
 import { loginUser } from "@/services/AuthService";
 import { loginAuth } from "@/authStore";
 
 export default {
   name: "AuthForm",
+  components: {
+    ModalAlert,
+  },
   data() {
     return {
       isRegisterForm: false,
       nome: "",
       login: "",
       senha: "",
+      showErrorModal: false,
+      modalTitle: "",
+      modalMessage: "",
     };
   },
   computed: {
@@ -89,9 +103,11 @@ export default {
     },
     handleError(error) {
       console.error(error);
-      alert(
-        this.isRegisterForm ? "Erro ao cadastrar" : "Login ou senha incorretos",
-      );
+      this.modalTitle = "Erro!";
+      this.modalMessage = this.isRegisterForm
+        ? "Erro ao Cadastrar"
+        : "Por favor, verifique se o login e a senha estão corretos.";
+      this.showErrorModal = true;
     },
   },
 };
