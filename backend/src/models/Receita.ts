@@ -32,6 +32,9 @@ class Receita
   public ingredientes?: string;
   public criado_em!: Date;
   public alterado_em!: Date;
+
+  public User?: User;
+  public Categoria?: Categoria;
 }
 
 Receita.init(
