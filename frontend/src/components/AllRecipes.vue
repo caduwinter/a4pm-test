@@ -44,6 +44,13 @@
           </div>
           <span class="manipulate" v-if="isUserRecipe(recipe.id)">
             <button
+              @click="editRecipe(recipe.id)"
+              class="edit-recipe-btn"
+              aria-label="Editar receita"
+            >
+              ✏️
+            </button>
+            <button
               @click="confirmDelete(recipe.id)"
               class="delete-recipe-btn"
               aria-label="Deletar receita"
@@ -71,7 +78,7 @@
 <script>
 import { searchQuery } from "@/eventBus";
 import { deleteRecipe } from "@/services/ReceitaService";
-import ModalConfirm from "@/components/ModalConfirm.vue"; // Modal component
+import ModalConfirm from "@/components/ModalConfirm.vue";
 
 export default {
   name: "AllRecipes",
@@ -110,6 +117,9 @@ export default {
     },
     hideTooltip() {
       this.activeTooltip = null;
+    },
+    editRecipe(recipeId) {
+      this.$router.push(`/receita/edit?id=${recipeId}`);
     },
     goToRecipe(recipeId) {
       this.$router.push(`/receita?id=${recipeId}`);
