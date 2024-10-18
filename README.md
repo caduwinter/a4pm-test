@@ -27,3 +27,8 @@ Este projeto utiliza Docker para criar contêineres para o backend e frontend.
 
 - Certifique-se de que as variáveis de ambiente no arquivo `.env` estejam configuradas corretamente para conectar-se ao banco de dados e outras dependências.
 - Se houver problemas de conexão, verifique as portas expostas e se os contêineres estão acessando as mesmas redes.
+- Verifique se os scripts possuem as permissões corretas de execução. Por exemplo, para garantir que o script `wait-for-it.sh` seja executável, utilize o seguinte comando:
+
+  ```bash
+  chmod +x ./backend/wait-for-it.sh
+  ```
