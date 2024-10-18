@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <Navbar
+    <Header
       :searchQuery="searchQuery"
       @update:searchQuery="updateSearchQuery"
     />
@@ -11,13 +11,13 @@
 </template>
 
 <script>
-import Navbar from "./components/Navbar.vue";
+import Header from "./components/Header.vue";
 import { onMounted } from "vue";
 import { initializeAuth } from "@/authStore";
 
 export default {
   components: {
-    Navbar,
+    Header,
   },
   data() {
     return {

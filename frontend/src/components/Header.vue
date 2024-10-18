@@ -1,11 +1,11 @@
 <template>
-  <nav class="navbar">
+  <header class="header">
     <div class="main-page">
-      <router-link class="navbar-logo" to="/">
+      <router-link class="header-logo" to="/">
         <font-awesome-icon icon="home" />
       </router-link>
     </div>
-    <div class="navbar-search">
+    <div class="header-search">
       <input
         class="search-input"
         v-model="searchQueryGlobal"
@@ -13,31 +13,31 @@
         aria-label="Filtrar receitas"
       />
     </div>
-    <div class="navbar-actions">
+    <div class="header-actions">
       <router-link
         v-if="isLoggedIn"
-        class="navbar-button create-recipe-btn"
+        class="header-button create-recipe-btn"
         to="/receita/add"
       >
         Adicionar
       </router-link>
       <router-link
         v-if="!isLoggedIn"
-        class="navbar-button login-btn"
+        class="header-button login-btn"
         to="/login"
       >
         Login
       </router-link>
       <a
         v-else
-        class="navbar-button logout-btn"
+        class="header-button logout-btn"
         href="#"
         @click.prevent="handleLogout"
       >
         Sair
       </a>
     </div>
-  </nav>
+  </header>
 </template>
 
 <script>
@@ -46,7 +46,7 @@ import { searchQuery } from "@/eventBus";
 import { logoutUser } from "@/services/AuthService.js";
 
 export default {
-  name: "NavbarComponent",
+  name: "HeaderComponent",
   setup() {
     const { isLoggedIn } = useAuth();
     return { isLoggedIn };
@@ -76,16 +76,16 @@ export default {
 </script>
 
 <style scoped>
-.navbar-logo {
+.header-logo {
   font-size: 1.7em;
   color: #fff;
 }
-.navbar-button {
+.header-button {
   color: #fff;
   text-decoration: none;
   background: none;
 }
-.navbar-search {
+.header-search {
   flex: 1;
 }
 .search-input {
@@ -109,7 +109,7 @@ export default {
   color: rgba(240, 240, 240, 0.528);
 }
 
-.navbar {
+.header {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -123,7 +123,7 @@ export default {
   align-content: center;
 }
 
-.navbar-actions {
+.header-actions {
   display: flex;
   gap: 1rem;
   padding: 0 2rem;
@@ -167,13 +167,13 @@ export default {
 }
 @media (max-width: 425px) {
   .main-page,
-  .navbar-button {
+  .header-button {
     font-size: 14px !important;
   }
 }
 @media (max-width: 480px) {
   .main-page,
-  .navbar-button {
+  .header-button {
     font-size: 18px;
   }
   .main-page {
